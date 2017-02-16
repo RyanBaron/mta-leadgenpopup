@@ -1,0 +1,90 @@
+/**
+* All of the CSS for your admin-specific functionality should be
+* included in this file.
+*/
+.mta-leadgenpopup-meta-wrapper {
+  .meta-input {
+    margin-bottom: 0.5rem;
+
+    textarea,
+    input,
+    select,
+    label {
+      width:100%;
+    }
+    &.timer {
+      display: none;
+    }
+  }
+  .headline-meta-wrapper {
+    h1, h2, h3, h4, h5 {
+      margin-bottom: 5px;
+    }
+  }
+  .content-meta-wrapper {
+    textarea {
+      min-height: 10rem;
+    }
+  }
+  &.two-col-text-right,
+  &.two-col-text-left {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    .style-meta-wrapper {
+      flex: 0 0 100%;
+    }
+    .headline-meta-wrapper {
+      flex: 0 0 100%;
+    }
+  }
+  &.two-col-text-right {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+
+    .content-meta-wrapper {
+      flex: 0 0 60%;
+
+      .headline-meta-wrapper,
+      .meta-input {
+        padding-left: 10px;
+      }
+    }
+    .form-meta-wrapper {
+      flex: 0 0 40%;
+
+      .headline-meta-wrapper,
+      .meta-input{
+        padding-right: 10px;
+      }
+    }
+  }
+  &.two-col-text-left {
+    .content-meta-wrapper {
+      flex: 0 0 60%;
+
+      .headline-meta-wrapper,
+      .meta-input {
+        padding-right: 10px;
+      }
+    }
+    .form-meta-wrapper {
+      flex: 0 0 40%;
+
+      .headline-meta-wrapper,
+      .meta-input{
+        padding-left: 10px;
+      }
+    }
+  }
+  &.exit-and-timer,
+  &.timer {
+    .meta-input {
+      &.timer {
+        display: block;
+      }
+    }
+  }
+}

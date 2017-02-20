@@ -118,136 +118,136 @@ class Mta_Leadgenpopup_Admin {
     $form_text          = get_post_meta($post->ID, '_mta_leadgenpopup_form_text', true);
     $gform_id           = get_post_meta($post->ID, '_mta_leadgenpopup_gform_id',true); ?>
 
-    <div class="bootstrap-wrapper mta-leadgenpopup-meta-wrapper <?php echo $layout ?> <?php echo $trigger; ?>">
+<div class="bootstrap-wrapper mta-leadgenpopup-meta-wrapper <?php echo $layout ?> <?php echo $trigger; ?>">
 
-      <div class="style-meta-wrapper">
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_layout"><?php printf( __('Select Popup Layout', 'mta-leadgenpopup') ); ?></label>
-          <select name="mta_leadgenpopup_layout" id="mta_leadgenpopup_layout">
-            <option value="" <?php selected( $layout, "" ); ?>><?php printf( __('Hidden', 'mta-leadgenpopup') ); ?></option>
-            <option value="single-col" <?php selected( $layout, "single-col" ); ?>><?php printf( __('Single Column', 'mta-leadgenpopup') ); ?></option>
-            <option value="two-col-text-left" <?php selected( $layout, "two-col-text-left" ); ?> ><?php printf( __('Two Column - Text Left', 'mta-leadgenpopup') ); ?></option>
-            <option value="two-col-text-right" <?php selected( $layout, "two-col-text-right" ); ?>><?php printf( __('Two Column - Text Right', 'mta-leadgenpopup') ); ?></option>
-          </select>
-        </div>
-
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_trigger"><?php printf( __('Select Popup Trigger', 'mta-leadgenpopup') ); ?></label>
-          <select name="mta_leadgenpopup_trigger" id="mta_leadgenpopup_trigger">
-            <option value="" <?php selected( $trigger, "" ); ?>><?php printf( __('None', 'mta-leadgenpopup') ); ?></option>
-            <option value="exit" <?php selected( $trigger, "exit" ); ?>><?php printf( __('Page Exit', 'mta-leadgenpopup') ); ?></option>
-            <option value="timer" <?php selected( $trigger, "timer" ); ?> ><?php printf( __('Time On Page', 'mta-leadgenpopup') ); ?></option>
-            <option value="exit-and-timer" <?php selected( $trigger, "exit-and-timer" ); ?>><?php printf( __('Page Exit & Time On Page', 'mta-leadgenpopup') ); ?></option>
-          </select>
-        </div>
-
-        <div class="meta-input timer">
-          <label for="mta_leadgenpopup_timer"><?php printf( __('Select Popup Timing', 'mta-leadgenpopup') ); ?></label>
-          <select name="mta_leadgenpopup_timer" id="mta_leadgenpopup_timer">
-            <?php //time values in miliseconds ?>
-            <option value="1000" <?php selected( $timer, "1000" ); ?>><?php printf( __('1 Second', 'mta-leadgenpopup') ); ?></option>
-            <option value="5000" <?php selected( $timer, "5000" ); ?>><?php printf( __('5 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="10000" <?php selected( $timer, "10000" ); ?>><?php printf( __('10 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="15000" <?php selected( $timer, "15000" ); ?>><?php printf( __('15 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="15000" <?php selected( $timer, "20000" ); ?>><?php printf( __('20 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="15000" <?php selected( $timer, "25000" ); ?>><?php printf( __('25 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="30000" <?php selected( $timer, "30000" ); ?>><?php printf( __('30 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="45000" <?php selected( $timer, "45000" ); ?>><?php printf( __('45 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="60000" <?php selected( $timer, "60000" ); ?>><?php printf( __('60 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="90000" <?php selected( $timer, "90000" ); ?>><?php printf( __('90 Seconds', 'mta-leadgenpopup') ); ?></option>
-            <option value="120000" <?php selected( $timer, "120000" ); ?>><?php printf( __('120 Seconds', 'mta-leadgenpopup') ); ?></option>
-          </select>
-        </div>
-      </div>
-
-      <div class="headline-meta-wrapper"><h4><?php printf( __('Popup Content', 'mta-leadgenpopup') ); ?></h4></div>
-      <div class="content-meta-wrapper">
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_superheadline"><?php printf( __('Super Headline', 'mta-leadgenpopup') ); ?></label>
-          <input type="text" name="mta_leadgenpopup_superheadline" id="mta_leadgenpopup_superheadline" value="<?php echo $superheadline; ?>" />
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
-        </div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_headline"><?php printf( __('Headline', 'mta-leadgenpopup') ); ?></label>
-          <input type="text" name="mta_leadgenpopup_headline" id="mta_leadgenpopup_headline" value="<?php echo $headline; ?>" />
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
-        </div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_subheadline"><?php printf( __('Sub Headline', 'mta-leadgenpopup') ); ?></label>
-          <input type="text" name="mta_leadgenpopup_subheadline" id="mta_leadgenpopup_subheadline" value="<?php echo $subheadline; ?>" />
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
-        </div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_text"><?php printf( __('Paragraph Text', 'mta-leadgenpopup') ); ?></label>
-          <textarea name="mta_leadgenpopup_text" id="mta_leadgenpopup_text"><?php echo $text; ?></textarea>
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>p(class), br, ul(class), ol(class), li(class), h1(class), h2(class),strong, em, i(class) and span(class)</em></div>
-        </div>
-      </div>
-
-      <div class="form-meta-wrapper">
-        <div class="headline-meta-wrapper"><h5><?php printf( __('Form header', 'mta-leadgenpopup') ); ?></h5></div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_form_header_align"><?php printf( __('Form Header Text Alignment', 'mta-leadgenpopup') ); ?></label>
-          <select name="mta_leadgenpopup_form_header_align" id="mta_leadgenpopup_form_header_align">
-            <option value="align-left" <?php selected( $form_header_align, "align-left" ); ?>><?php printf( __('Left Align', 'mta-leadgenpopup') ); ?></option>
-            <option value="align-center" <?php selected( $form_header_align, "align-center" ); ?>><?php printf( __('Center Align', 'mta-leadgenpopup') ); ?></option>
-          </select>
-        </div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_form_superheadline"><?php printf( __('Form Super Headline', 'mta-leadgenpopup') ); ?></label>
-          <input type="text" name="mta_leadgenpopup_form_superheadline" id="mta_leadgenpopup_form_superheadline" value="<?php echo $form_superheadline; ?>" />
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
-        </div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_form_headline"><?php printf( __('Form Headline', 'mta-leadgenpopup') ); ?></label>
-          <input type="text" name="mta_leadgenpopup_form_headline" id="mta_leadgenpopup_form_headline" value="<?php echo $form_headline; ?>" />
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
-        </div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_form_subheadline"><?php printf( __('Form Super Headline', 'mta-leadgenpopup') ); ?></label>
-          <input type="text" name="mta_leadgenpopup_form_subheadline" id="mta_leadgenpopup_form_subheadline" value="<?php echo $form_subheadline; ?>" />
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
-        </div>
-
-        <div class="headline-meta-wrapper"><h5><?php printf( __('Form', 'mta-leadgenpopup') ); ?></h5></div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_form_labels"><?php printf( __('Show/Hide Field Labels', 'mta-leadgenpopup') ); ?></label>
-          <select name="mta_leadgenpopup_form_labels" id="mta_leadgenpopup_form_labels">
-            <option value="show-labels" <?php selected( $form_labels, "show-labels" ); ?>><?php printf( __('Show Labels', 'mta-leadgenpopup') ); ?></option>
-            <option value="hide-labels" <?php selected( $form_labels, "hide-labels" ); ?>><?php printf( __('Hide Labels', 'mta-leadgenpopup') ); ?></option>
-          </select>
-        </div>
-
-        <?php
-        $select = '<select name="mta_leadgenpopup_gform_id" id="mta_leadgenpopup_gform_id">';
-        $select .= '<option id="">None</option>';
-        $forms = RGFormsModel::get_forms( null, 'title' );
-        foreach( $forms as $form ):
-          $select .= '<option value="' . $form->id . '" ' . selected( $gform_id, $form->id, false ) .' >' . $form->title . '</option>';
-        endforeach;
-        $select .= '</select>'; ?>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_gform_id"><?php printf( __('Select Popup Gravity Form', 'mta-leadgenpopup') ); ?></label>
-          <?php echo $select; ?>
-        </div>
-
-        <div class="headline-meta-wrapper"><h5><?php printf( __('Form Footer', 'mta-leadgenpopup') ); ?></h5></div>
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_form_footer_align"><?php printf( __('Footer Footer Text Alignment', 'mta-leadgenpopup') ); ?></label>
-          <select name="mta_leadgenpopup_form_footer_align" id="mta_leadgenpopup_form_footer_align">
-            <option value="align-left" <?php selected( $form_footer_align, "align-left" ); ?>><?php printf( __('Left Align', 'mta-leadgenpopup') ); ?></option>
-            <option value="align-center" <?php selected( $form_footer_align, "align-center" ); ?>><?php printf( __('Center Align', 'mta-leadgenpopup') ); ?></option>
-          </select>
-        </div>
-
-        <div class="meta-input">
-          <label for="mta_leadgenpopup_form_text"><?php printf( __('Paragraph Text', 'mta-leadgenpopup') ); ?></label>
-          <textarea name="mta_leadgenpopup_form_text" id="mta_leadgenpopup_form_text"><?php echo $form_text; ?></textarea>
-          <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>p(class), br, ul(class), ol(class), li(class), h1(class), h2(class),strong, em, i(class) and span(class)</em></div>
-        </div>
-      </div>
+  <div class="style-meta-wrapper">
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_layout"><?php printf( __('Select Popup Layout', 'mta-leadgenpopup') ); ?></label>
+      <select name="mta_leadgenpopup_layout" id="mta_leadgenpopup_layout">
+        <option value="" <?php selected( $layout, "" ); ?>><?php printf( __('Hidden', 'mta-leadgenpopup') ); ?></option>
+        <option value="single-col" <?php selected( $layout, "single-col" ); ?>><?php printf( __('Single Column', 'mta-leadgenpopup') ); ?></option>
+        <option value="two-col-text-left" <?php selected( $layout, "two-col-text-left" ); ?> ><?php printf( __('Two Column - Text Left', 'mta-leadgenpopup') ); ?></option>
+        <option value="two-col-text-right" <?php selected( $layout, "two-col-text-right" ); ?>><?php printf( __('Two Column - Text Right', 'mta-leadgenpopup') ); ?></option>
+      </select>
     </div>
-  <?php
+
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_trigger"><?php printf( __('Select Popup Trigger', 'mta-leadgenpopup') ); ?></label>
+      <select name="mta_leadgenpopup_trigger" id="mta_leadgenpopup_trigger">
+        <option value="" <?php selected( $trigger, "" ); ?>><?php printf( __('None', 'mta-leadgenpopup') ); ?></option>
+        <option value="exit" <?php selected( $trigger, "exit" ); ?>><?php printf( __('Page Exit', 'mta-leadgenpopup') ); ?></option>
+        <option value="timer" <?php selected( $trigger, "timer" ); ?> ><?php printf( __('Time On Page', 'mta-leadgenpopup') ); ?></option>
+        <option value="exit-and-timer" <?php selected( $trigger, "exit-and-timer" ); ?>><?php printf( __('Page Exit & Time On Page', 'mta-leadgenpopup') ); ?></option>
+      </select>
+    </div>
+
+    <div class="meta-input timer">
+      <label for="mta_leadgenpopup_timer"><?php printf( __('Select Popup Timing', 'mta-leadgenpopup') ); ?></label>
+      <select name="mta_leadgenpopup_timer" id="mta_leadgenpopup_timer">
+        <?php //time values in miliseconds ?>
+        <option value="1000" <?php selected( $timer, "1000" ); ?>><?php printf( __('1 Second', 'mta-leadgenpopup') ); ?></option>
+        <option value="5000" <?php selected( $timer, "5000" ); ?>><?php printf( __('5 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="10000" <?php selected( $timer, "10000" ); ?>><?php printf( __('10 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="15000" <?php selected( $timer, "15000" ); ?>><?php printf( __('15 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="15000" <?php selected( $timer, "20000" ); ?>><?php printf( __('20 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="15000" <?php selected( $timer, "25000" ); ?>><?php printf( __('25 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="30000" <?php selected( $timer, "30000" ); ?>><?php printf( __('30 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="45000" <?php selected( $timer, "45000" ); ?>><?php printf( __('45 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="60000" <?php selected( $timer, "60000" ); ?>><?php printf( __('60 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="90000" <?php selected( $timer, "90000" ); ?>><?php printf( __('90 Seconds', 'mta-leadgenpopup') ); ?></option>
+        <option value="120000" <?php selected( $timer, "120000" ); ?>><?php printf( __('120 Seconds', 'mta-leadgenpopup') ); ?></option>
+      </select>
+    </div>
+  </div>
+
+  <div class="headline-meta-wrapper"><h4><?php printf( __('Popup Content', 'mta-leadgenpopup') ); ?></h4></div>
+  <div class="content-meta-wrapper">
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_superheadline"><?php printf( __('Super Headline', 'mta-leadgenpopup') ); ?></label>
+      <input type="text" name="mta_leadgenpopup_superheadline" id="mta_leadgenpopup_superheadline" value="<?php echo $superheadline; ?>" />
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
+    </div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_headline"><?php printf( __('Headline', 'mta-leadgenpopup') ); ?></label>
+      <input type="text" name="mta_leadgenpopup_headline" id="mta_leadgenpopup_headline" value="<?php echo $headline; ?>" />
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
+    </div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_subheadline"><?php printf( __('Sub Headline', 'mta-leadgenpopup') ); ?></label>
+      <input type="text" name="mta_leadgenpopup_subheadline" id="mta_leadgenpopup_subheadline" value="<?php echo $subheadline; ?>" />
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
+    </div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_text"><?php printf( __('Paragraph Text', 'mta-leadgenpopup') ); ?></label>
+      <textarea name="mta_leadgenpopup_text" id="mta_leadgenpopup_text"><?php echo $text; ?></textarea>
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>p(class), br, ul(class), ol(class), li(class), h1(class), h2(class),strong, em, i(class) and span(class)</em></div>
+    </div>
+  </div>
+
+  <div class="form-meta-wrapper">
+    <div class="headline-meta-wrapper"><h4><?php printf( __('Form header', 'mta-leadgenpopup') ); ?></h4></div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_form_header_align"><?php printf( __('Form Header Text Alignment', 'mta-leadgenpopup') ); ?></label>
+      <select name="mta_leadgenpopup_form_header_align" id="mta_leadgenpopup_form_header_align">
+        <option value="align-left" <?php selected( $form_header_align, "align-left" ); ?>><?php printf( __('Left Align', 'mta-leadgenpopup') ); ?></option>
+        <option value="align-center" <?php selected( $form_header_align, "align-center" ); ?>><?php printf( __('Center Align', 'mta-leadgenpopup') ); ?></option>
+      </select>
+    </div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_form_superheadline"><?php printf( __('Form Super Headline', 'mta-leadgenpopup') ); ?></label>
+      <input type="text" name="mta_leadgenpopup_form_superheadline" id="mta_leadgenpopup_form_superheadline" value="<?php echo $form_superheadline; ?>" />
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
+    </div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_form_headline"><?php printf( __('Form Headline', 'mta-leadgenpopup') ); ?></label>
+      <input type="text" name="mta_leadgenpopup_form_headline" id="mta_leadgenpopup_form_headline" value="<?php echo $form_headline; ?>" />
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
+    </div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_form_subheadline"><?php printf( __('Form Sub Headline', 'mta-leadgenpopup') ); ?></label>
+      <input type="text" name="mta_leadgenpopup_form_subheadline" id="mta_leadgenpopup_form_subheadline" value="<?php echo $form_subheadline; ?>" />
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>strong, em, i(class) and span(class)</em></div>
+    </div>
+
+    <div class="headline-meta-wrapper"><h4><?php printf( __('Form', 'mta-leadgenpopup') ); ?></h4></div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_form_labels"><?php printf( __('Show/Hide Field Labels', 'mta-leadgenpopup') ); ?></label>
+      <select name="mta_leadgenpopup_form_labels" id="mta_leadgenpopup_form_labels">
+        <option value="show-labels" <?php selected( $form_labels, "show-labels" ); ?>><?php printf( __('Show Labels', 'mta-leadgenpopup') ); ?></option>
+        <option value="hide-labels" <?php selected( $form_labels, "hide-labels" ); ?>><?php printf( __('Hide Labels', 'mta-leadgenpopup') ); ?></option>
+      </select>
+    </div>
+
+    <?php
+    $select = '<select name="mta_leadgenpopup_gform_id" id="mta_leadgenpopup_gform_id">';
+    $select .= '<option id="">None</option>';
+    $forms = RGFormsModel::get_forms( null, 'title' );
+    foreach( $forms as $form ):
+    $select .= '<option value="' . $form->id . '" ' . selected( $gform_id, $form->id, false ) .' >' . $form->title . '</option>';
+    endforeach;
+    $select .= '</select>'; ?>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_gform_id"><?php printf( __('Select Popup Gravity Form', 'mta-leadgenpopup') ); ?></label>
+      <?php echo $select; ?>
+    </div>
+
+    <div class="headline-meta-wrapper"><h4><?php printf( __('Form Footer', 'mta-leadgenpopup') ); ?></h4></div>
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_form_footer_align"><?php printf( __('Footer Footer Text Alignment', 'mta-leadgenpopup') ); ?></label>
+      <select name="mta_leadgenpopup_form_footer_align" id="mta_leadgenpopup_form_footer_align">
+        <option value="align-left" <?php selected( $form_footer_align, "align-left" ); ?>><?php printf( __('Left Align', 'mta-leadgenpopup') ); ?></option>
+        <option value="align-center" <?php selected( $form_footer_align, "align-center" ); ?>><?php printf( __('Center Align', 'mta-leadgenpopup') ); ?></option>
+      </select>
+    </div>
+
+    <div class="meta-input">
+      <label for="mta_leadgenpopup_form_text"><?php printf( __('Paragraph Text', 'mta-leadgenpopup') ); ?></label>
+      <textarea name="mta_leadgenpopup_form_text" id="mta_leadgenpopup_form_text"><?php echo $form_text; ?></textarea>
+      <div class="desc"><?php printf( __('Allowed Tags', 'mta-leadgenpopup') ); ?>: <em>p(class), br, ul(class), ol(class), li(class), h1(class), h2(class),strong, em, i(class) and span(class)</em></div>
+    </div>
+  </div>
+</div>
+<?php
   }
 
   /**
@@ -293,39 +293,39 @@ class Mta_Leadgenpopup_Admin {
       'strong' => array(),
       'em' => array(),
       'i' => array(
-        'class' => array(),
-        'aria-hidden' => array(),
-      ),
+      'class' => array(),
+      'aria-hidden' => array(),
+    ),
       'span' => array(
-        'class' => array(),
-      ),
+      'class' => array(),
+    ),
     );
 
     $allowed_input_textarea = array(
       'p' => array(
-        'class' => array(),
-      ),
+      'class' => array(),
+    ),
       'strong' => array(),
       'br' => array(),
       'em' => array(),
       'span' => array(
-        'class' => array()
-      ),
+      'class' => array()
+    ),
       'ul' => array(
-        'class' => array()
-      ),
+      'class' => array()
+    ),
       'ol' => array(
-        'class' => array()
-      ),
+      'class' => array()
+    ),
       'li' => array(
-        'class' => array()
-      ),
+      'class' => array()
+    ),
       'h1' => array(
-        'class' => array()
-      ),
+      'class' => array()
+    ),
       'h2' => array(
-        'class' => array()
-      ),
+      'class' => array()
+    ),
     );
 
     /* OK, its safe for us to save the data now. */

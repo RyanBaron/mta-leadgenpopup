@@ -258,7 +258,7 @@ class Mta_Leadgenpopup_Admin {
       <h2 class="nav-tab-wrapper">
         <!-- when tab buttons are clicked we jump back to the same page but with a new parameter that represents the clicked tab. accordingly we make it active -->
         <a href="?page=mta-leadgen-popup-admin&tab=popup-content" class="nav-tab <?php if($active_tab == 'popup-content'){echo 'nav-tab-active';} ?> ">
-          <?php _e('Popup Content', 'mta-leadgenpopup'); ?>
+          <?php _e('Default Popup', 'mta-leadgenpopup'); ?>
         </a>
         <a href="?page=mta-leadgen-popup-admin&tab=page-display" class="nav-tab <?php if($active_tab == 'page-display'){echo 'nav-tab-active';} ?>">
           <?php _e('Page Display', 'mta-leadgenpopup'); ?>
@@ -488,7 +488,7 @@ class Mta_Leadgenpopup_Admin {
     add_settings_section(
       'post_display',
       'Post Selection',
-      array( $this, 'print_page_section_info' ),
+      array( $this, 'print_post_section_info' ),
       'mta-leadgen-popup-post-display'
     );
     add_settings_field(
@@ -589,7 +589,7 @@ class Mta_Leadgenpopup_Admin {
     */
   public function print_settings_section_info() {
     print '<p>Set the default MTA Lead Generation Popup settings.</p>';
-    print '<p>These settings can be overwritten on a per page/post basis by going to the individual page/post admin page.</p>';
+    print '<p>These settings can be overridden on a per page/post basis by filling in the "Lead Generation Popup" meta fields on the admin side of individual page/post.</p>';
   }
 
   /**
@@ -597,7 +597,7 @@ class Mta_Leadgenpopup_Admin {
     */
   public function print_content_section_info() {
     print '<p>Set the default MTA Lead Generation Popup Content Column.</p>';
-    print '<p>These settings can be overwritten on a per page/post basis by going to the individual page/post admin page.</p>';
+    print '<p>These settings can be overridden on a per page/post basis by filling in the "Lead Generation Popup" meta fields on the admin side of individual page/post.</p>';
   }
 
   /**
@@ -605,14 +605,23 @@ class Mta_Leadgenpopup_Admin {
     */
   public function print_form_section_info() {
     print '<p>Set the default MTA Lead Generation Popup Form Column.</p>';
-    print '<p>These settings can be overwritten on a per page/post basis by going to the individual page/post admin page.</p>';
+    print '<p>These settings can be overridden on a per page/post basis by filling in the "Lead Generation Popup" meta fields on the admin side of individual page/post.</p>';
   }
 
   /**
     * Print the Page Display Section text
     */
   public function print_page_section_info() {
-    print '<p>Select the page(s) you want to display the Lead Generation Popup on.</p>';
+    print '<p>Select the page(s) you want to display the Default Lead Generation Popup on.</p>';
+    print '<p>Custom popups can also be create on a per page basis by filling in the "Lead Generation Popup" meta fields on the admin side of individual pages.</p>';
+  }
+
+  /**
+    * Print the Post Display Section text
+    */
+  public function print_post_section_info() {
+    print '<p>Select the post(s) you want to display the Default Lead Generation Popup on.</p>';
+    print '<p>Custom popups can also be create on a per post basis by filling in the "Lead Generation Popup" meta fields on the admin side of individual posts.</p>';
   }
 
   /**
@@ -799,16 +808,18 @@ class Mta_Leadgenpopup_Admin {
     );
 
     //generate the checkbox fields
+    print '<div class="page-list-wrapper">';
     foreach( $site_pages as $page ) {
+      $id = $page->ID;
       $title = $page->post_title;
-      $slug = $page->post_name;
-      $field_value = isset($this->page_display['mta_leadgen_pages'][$slug]) ? $this->page_display['mta_leadgen_pages'][$slug] : 0;
+      $field_value = isset($this->page_display['mta_leadgen_pages'][$id]) ? $this->page_display['mta_leadgen_pages'][$id] : 0;
 
-      printf( __( '<div class="meta-input"><label><input type="checkbox" name="mta_leadgen_popup_page_display[mta_leadgen_pages][%1$s]" id="%1$s" value="1" %3$s>%2$s</label></div>' ),
-             $slug,
+      printf( __( '<div class="meta-input page-checkbox"><label><input type="checkbox" name="mta_leadgen_popup_page_display[mta_leadgen_pages][%1$s]" id="%1$s" value="1" %3$s><span class="label-text">%2$s</span></label></div>' ),
+             $id,
              $title,
              checked( $field_value, '1', FALSE));
     }
+    print '</div>';
   }
 
   /**
@@ -820,22 +831,24 @@ class Mta_Leadgenpopup_Admin {
     $site_posts = get_posts(
       array(
       'numberposts' => -1,
-      'order'       => 'ASC',
-      'orderby'     => 'title'
+      'order'       => 'DESC',
+      'orderby'     => 'date'
     )
     );
 
     //generate the checkbox fields
+    print '<div class="post-list-wrapper">';
     foreach( $site_posts as $post ) {
+      $id = $post->ID;
       $title = $post->post_title;
-      $slug = $post->post_name;
-      $field_value = isset($this->post_display['mta_leadgen_posts'][$slug]) ? $this->post_display['mta_leadgen_posts'][$slug] : 0;
+      $field_value = isset($this->post_display['mta_leadgen_posts'][$id]) ? $this->post_display['mta_leadgen_posts'][$id] : 0;
 
-      printf( __( '<div class="meta-input"><label><input type="checkbox" name="mta_leadgen_popup_post_display[mta_leadgen_posts][%1$s]" id="%1$s" value="1" %3$s>%2$s</label></div>' ),
-             $slug,
+      printf( __( '<div class="meta-input post-checkbox"><label><input type="checkbox" name="mta_leadgen_popup_post_display[mta_leadgen_posts][%1$s]" id="%1$s" value="1" %3$s><span class="label-text">%2$s</span></label></div>' ),
+             $id,
              $title,
              checked( $field_value, '1', FALSE));
     }
+    print '</div>';
   }
 
   /**
@@ -862,7 +875,7 @@ class Mta_Leadgenpopup_Admin {
     $admin_settings = admin_url( 'admin.php?page=mta-leadgen-popup-admin' );
 
     // Use get_post_meta to retrieve an existing value from the database.
-    $enable         = get_post_meta($post->ID, '_mta_leadgen_enable_custom', true);
+    $enable         = get_post_meta($post->ID, '_mta_leadgenpopup_enable_custom', true);
 
     $layout         = get_post_meta($post->ID, '_mta_leadgenpopup_layout', true);
     $trigger        = get_post_meta($post->ID, '_mta_leadgenpopup_trigger', true);
@@ -881,16 +894,16 @@ class Mta_Leadgenpopup_Admin {
     $form_text          = get_post_meta($post->ID, '_mta_leadgenpopup_form_text', true);
     $gform_id           = get_post_meta($post->ID, '_mta_leadgenpopup_gform_id',true); ?>
 
-    <div class="bootstrap-wrapper mta-leadgenpopup-meta-wrapper <?php echo $layout ?> <?php echo $trigger; ?>">
+    <div class="bootstrap-wrapper mta-leadgenpopup-meta-wrapper <?php echo $enable ?> <?php echo $layout ?> <?php echo $trigger; ?>">
 
       <div class="display-meta-wrapper">
         <div class="meta-input">
-          <label for="mta_leadgen_enable_custom"><?php printf( __('Enable Single Page Popup', 'mta-leadgenpopup') ); ?></label>
-          <select name="mta_leadgen_enable_custom" id="mta_leadgen_enable_custom">
+          <label for="mta_leadgenpopup_enable_custom"><?php printf( __('Enable Custom Page Popup', 'mta-leadgenpopup') ); ?></label>
+          <select name="mta_leadgenpopup_enable_custom" id="mta_leadgenpopup_enable_custom">
             <option value="" <?php selected( $enable, "" ); ?>><?php printf( __('Default', 'mta-leadgenpopup') ); ?></option>
             <option value="custom" <?php selected( $enable, "custom" ); ?>><?php printf( __('Custom', 'mta-leadgenpopup') ); ?></option>
           </select>
-          <div class="desc"><?php printf( __('Selecting "Custom" will allow you to overwrite the settings on the main <a href="%1$s" target="_blank">Admin MTA Lead Generation Page</a> for this individual page/post.', 'mta-leadgenpopup'), $admin_settings ); ?></div>
+          <div class="desc"><?php printf( __('Select <strong>Default</strong> to use the default <a href="%1$s" target="_blank">Lead Generation Popup</a> settings.<br> Select <strong>Custom</strong> to overwrite the default settings and create a custom popup for this individual page/post.', 'mta-leadgenpopup'), $admin_settings ); ?></div>
         </div>
       </div>
 
@@ -1066,8 +1079,8 @@ class Mta_Leadgenpopup_Admin {
     $allowed_input_textarea = $this->get_allowed_field_tags('textarea');
 
     /* OK, its safe for us to save the data now. */
-    if( isset( $_POST['mta_leadgen_enable_custom'] ) )
-      update_post_meta( $post_id, '_mta_leadgenpopup_enable_custom', wp_kses( $_POST['mta_leadgen_enable_custom']), $allow_text_only);
+    if( isset( $_POST['mta_leadgenpopup_enable_custom'] ) )
+      update_post_meta( $post_id, '_mta_leadgenpopup_enable_custom', wp_kses( $_POST['mta_leadgenpopup_enable_custom']), $allow_text_only);
 
     if( isset( $_POST['mta_leadgenpopup_layout'] ) )
       update_post_meta( $post_id, '_mta_leadgenpopup_layout', wp_kses( $_POST['mta_leadgenpopup_layout']), $allow_text_only);

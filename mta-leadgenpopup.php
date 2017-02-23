@@ -16,7 +16,7 @@
  * Plugin Name:       MTA Lead Generation Popup
  * Plugin URI:        http://www.madtownagency.com/
  * Description:       This plugin displays a Call to Action popup to users that incorportates a Gravity Form and can be show on exit intent or after a specific period of time.
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            Ryan Baron
  * Author URI:        http://www.madtownagency.com
  * License:           GPL-2.0+

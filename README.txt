@@ -43,6 +43,12 @@ Questions: ryan@madtownagency.com
 
 == Changelog ==
 
+**Version 1.0.2**
+
+* Added a plugin settings page where a default popup form can be created and added/removed to any page or post (not custom posts) on the site
+* Default popup content/settings can be overridden on individual pages/posts
+* Minor bug fixes
+
 **Version 1.0.1**
 
 * Improving admin UI labeling, adding screenshots and improved readme.txt

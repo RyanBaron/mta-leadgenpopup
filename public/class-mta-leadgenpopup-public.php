@@ -153,20 +153,16 @@ class Mta_Leadgenpopup_Public {
 
       } else {
 
-        //get the page slug so we can check if it is selected to use the default popup on the page/post
-        $post = get_post($post_id);
-        $slug = $post->post_name;
         $default_popup = 0; //assume the page/post is not displaying the popup
 
         if(is_page()) {
           //check if this page is selected for display of the default popup
           $page_display = get_option( 'mta_leadgen_popup_page_display' );
-          $default_popup = isset($page_display['mta_leadgen_pages'][$slug]) ? $page_display['mta_leadgen_pages'][$slug] : 0;
-
+          $default_popup = isset($page_display['mta_leadgen_pages'][$post_id]) ? $page_display['mta_leadgen_pages'][$post_id] : 0;
         } elseif(is_single()) {
           //check if this ppostage is selected for display of the default popup
           $post_display = get_option( 'mta_leadgen_popup_post_display' );
-          $default_popup = isset($post_display['mta_leadgen_pages'][$slug]) ? $post_display['mta_leadgen_pages'][$slug] : 0;
+          $default_popup = isset($post_display['mta_leadgen_posts'][$post_id]) ? $post_display['mta_leadgen_posts'][$post_id] : 0;
         }
 
         if($default_popup) {

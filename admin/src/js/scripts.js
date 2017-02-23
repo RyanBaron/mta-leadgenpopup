@@ -50,6 +50,14 @@
         this.trigger_selector_values.push(this.trigger_selector.options[j].value);
       }
     }
+    //attach an array of possible enable customer selection classes to the object
+    this.enable_custom = document.getElementById("mta_leadgenpopup_enable_custom");
+    this.enable_custom_values = [];
+    for (var k = 0; k < this.enable_custom.length; k++) {
+      if(this.enable_custom.options[k].value !== '') {
+        this.enable_custom_values.push(this.enable_custom.options[k].value);
+      }
+    }
   };
 
   $.MTALeadGenPopupAdminSection.prototype = {
@@ -75,6 +83,15 @@
         //loop through the layout_selector_values and remove them from the dom wrapper element before adding the new item
         for (var j = 0; j < that.trigger_selector_values.length; j++) {
           $('.mta-leadgenpopup-meta-wrapper').removeClass(that.trigger_selector_values[j]);
+        }
+        //add the new trigger class value
+        $('.mta-leadgenpopup-meta-wrapper').addClass(this.value);
+      });
+
+      this.enable_custom.addEventListener("change", function() {
+        //loop through the layout_selector_values and remove them from the dom wrapper element before adding the new item
+        for (var k = 0; k < that.enable_custom_values.length; k++) {
+          $('.mta-leadgenpopup-meta-wrapper').removeClass(that.enable_custom_values[k]);
         }
         //add the new trigger class value
         $('.mta-leadgenpopup-meta-wrapper').addClass(this.value);

@@ -3,6 +3,21 @@
 * included in this file.
 */
 .mta-leadgenpopup-meta-wrapper {
+
+  .form-meta-wrapper,
+  .headline-meta-wrapper,
+  .content-meta-wrapper,
+  .style-meta-wrapper {
+    display: none;
+  }
+  &.custom {
+    .form-meta-wrapper,
+    .headline-meta-wrapper,
+    .content-meta-wrapper,
+    .style-meta-wrapper {
+      display: block;
+    }
+  }
   .meta-input {
     margin-bottom: 0.5rem;
 
@@ -102,6 +117,56 @@
       }
       textarea {
         min-height: 10rem;
+      }
+
+      .post-list-wrapper,
+      .page-list-wrapper {
+        .meta-input {
+          &.page-checkbox,
+          &.post-checkbox {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width:768px) {
+
+  .mta-leadgenpopup-options-page {
+    .form-table {
+      tr {
+        td {
+          width: 90%;
+
+          .post-list-wrapper,
+          .page-list-wrapper {
+            display:flex;
+            flex-wrap: wrap;
+
+            .meta-input {
+              &.page-checkbox,
+              &.post-checkbox {
+                flex:0 0 50%;
+
+                label {
+                  position: relative;
+                }
+
+                input[type="checkbox"] {
+                  position: absolute;
+                  top: 5px;
+                  left: 0;
+                }
+                span.label-text {
+                  padding-left: 25px;
+                  display: block;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

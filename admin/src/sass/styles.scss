@@ -88,3 +88,21 @@
     }
   }
 }
+
+
+//////
+// Admin page styling
+//////
+.mta-leadgenpopup-options-page {
+  .form-table {
+    tr {
+      input[type="text"], select, textarea {
+        width: 100%;
+        max-width: 800px
+      }
+      textarea {
+        min-height: 10rem;
+      }
+    }
+  }
+}

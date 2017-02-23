@@ -129,28 +129,72 @@ class Mta_Leadgenpopup_Public {
       $post_id = get_the_ID();
 
     if( isset($post_id) && !empty($post_id) ) {
-      $layout         = get_post_meta($post_id, '_mta_leadgenpopup_layout', true);
+
+      $enable_custom  = get_post_meta($post_id, '_mta_leadgenpopup_enable_custom', true);
+
+      if(isset($enable_custom) && $enable_custom == 'custom') {
+        //if mta_leadgenpopup_enable_custom is set user the meta values from the individual page
+        $layout         = get_post_meta($post_id, '_mta_leadgenpopup_layout', true);
+        $trigger        = get_post_meta($post_id, '_mta_leadgenpopup_trigger', true);
+        $timer          = get_post_meta($post_id, '_mta_leadgenpopup_timer', true);
+        $superheadline  = get_post_meta($post_id, '_mta_leadgenpopup_superheadline', true);
+        $headline       = get_post_meta($post_id, '_mta_leadgenpopup_headline', true);
+        $subheadline    = get_post_meta($post_id, '_mta_leadgenpopup_subheadline', true);
+        $text           = get_post_meta($post_id, '_mta_leadgenpopup_text', true);
+
+        $form_header_align  = get_post_meta($post_id, '_mta_leadgenpopup_form_header_align', true);
+        $form_footer_align  = get_post_meta($post_id, '_mta_leadgenpopup_form_footer_align', true);
+        $form_labels        = get_post_meta($post_id, '_mta_leadgenpopup_form_labels', true);
+        $form_superheadline = get_post_meta($post_id, '_mta_leadgenpopup_form_superheadline', true);
+        $form_headline      = get_post_meta($post_id, '_mta_leadgenpopup_form_headline', true);
+        $form_subheadline   = get_post_meta($post_id, '_mta_leadgenpopup_form_subheadline', true);
+        $form_text          = get_post_meta($post_id, '_mta_leadgenpopup_form_text', true);
+        $gform_id           = get_post_meta($post_id, '_mta_leadgenpopup_gform_id',true);
+
+      } else {
+
+        //get the page slug so we can check if it is selected to use the default popup on the page/post
+        $post = get_post($post_id);
+        $slug = $post->post_name;
+        $default_popup = 0; //assume the page/post is not displaying the popup
+
+        if(is_page()) {
+          //check if this page is selected for display of the default popup
+          $page_display = get_option( 'mta_leadgen_popup_page_display' );
+          $default_popup = isset($page_display['mta_leadgen_pages'][$slug]) ? $page_display['mta_leadgen_pages'][$slug] : 0;
+
+        } elseif(is_single()) {
+          //check if this ppostage is selected for display of the default popup
+          $post_display = get_option( 'mta_leadgen_popup_post_display' );
+          $default_popup = isset($post_display['mta_leadgen_pages'][$slug]) ? $post_display['mta_leadgen_pages'][$slug] : 0;
+        }
+
+        if($default_popup) {
+          //if the page/post is using the default display get the popup content values
+          $default_content = get_option( 'mta_leadgen_popup_content' );
+
+          $layout             = isset($default_content['mta_leadgenpopup_layout']) ? $default_content['mta_leadgenpopup_layout'] : '';
+          $trigger            = isset($default_content['mta_leadgenpopup_trigger']) ? $default_content['mta_leadgenpopup_trigger'] : '';
+          $timer              = isset($default_content['mta_leadgenpopup_timer']) ? $default_content['mta_leadgenpopup_timer'] : '';
+          $superheadline      = isset($default_content['mta_leadgenpopup_superheadline']) ? $default_content['mta_leadgenpopup_superheadline'] : '';
+          $headline           = isset($default_content['mta_leadgenpopup_headline']) ? $default_content['mta_leadgenpopup_headline'] : '';
+          $subheadline        = isset($default_content['mta_leadgenpopup_subheadline']) ? $default_content['mta_leadgenpopup_subheadline'] : '';
+          $text               = isset($default_content['mta_leadgenpopup_text']) ? $default_content['mta_leadgenpopup_text'] : '';
+          $form_header_align  = isset($default_content['mta_leadgenpopup_form_header_align']) ? $default_content['mta_leadgenpopup_form_header_align'] : '';
+          $form_footer_align  = isset($default_content['mta_leadgenpopup_form_footer_align']) ? $default_content['mta_leadgenpopup_form_footer_align'] : '';
+          $form_labels        = isset($default_content['mta_leadgenpopup_form_labels']) ? $default_content['mta_leadgenpopup_form_labels'] : '';
+          $form_superheadline = isset($default_content['mta_leadgenpopup_form_superheadline']) ? $default_content['mta_leadgenpopup_form_superheadline'] : '';
+          $form_headline      = isset($default_content['mta_leadgenpopup_form_headline']) ? $default_content['mta_leadgenpopup_form_headline'] : '';
+          $form_subheadline   = isset($default_content['mta_leadgenpopup_form_subheadline']) ? $default_content['mta_leadgenpopup_form_subheadline'] : '';
+          $form_text          = isset($default_content['mta_leadgenpopup_form_text']) ? $default_content['mta_leadgenpopup_form_text'] : '';
+          $gform_id           = isset($default_content['mta_leadgenpopup_gform_id']) ? $default_content['mta_leadgenpopup_gform_id'] : '';
+        }
+      }
 
       //bail if the layout is empty
       if(empty($layout)) {
         return false;
       }
-
-      $trigger        = get_post_meta($post_id, '_mta_leadgenpopup_trigger', true);
-      $timer          = get_post_meta($post_id, '_mta_leadgenpopup_timer', true);
-      $superheadline  = get_post_meta($post_id, '_mta_leadgenpopup_superheadline', true);
-      $headline       = get_post_meta($post_id, '_mta_leadgenpopup_headline', true);
-      $subheadline    = get_post_meta($post_id, '_mta_leadgenpopup_subheadline', true);
-      $text           = get_post_meta($post_id, '_mta_leadgenpopup_text', true);
-
-      $form_header_align  = get_post_meta($post_id, '_mta_leadgenpopup_form_header_align', true);
-      $form_footer_align  = get_post_meta($post_id, '_mta_leadgenpopup_form_footer_align', true);
-      $form_labels        = get_post_meta($post_id, '_mta_leadgenpopup_form_labels', true);
-      $form_superheadline = get_post_meta($post_id, '_mta_leadgenpopup_form_superheadline', true);
-      $form_headline      = get_post_meta($post_id, '_mta_leadgenpopup_form_headline', true);
-      $form_subheadline   = get_post_meta($post_id, '_mta_leadgenpopup_form_subheadline', true);
-      $form_text          = get_post_meta($post_id, '_mta_leadgenpopup_form_text', true);
-      $gform_id           = get_post_meta($post_id, '_mta_leadgenpopup_gform_id',true);
 
       //get the page name and sanitize it for html
       $page_name = sanitize_html_class(str_replace(" ", "-", strtolower(get_the_title($post_id))), 'default');
@@ -177,8 +221,8 @@ class Mta_Leadgenpopup_Public {
       $headline_html .= !empty($headline) ? $headline : "";
       $headline_html .= !empty($subheadline) ? "<span class='subheadline'>$subheadline</span>" : "";
       //wrap the content headline html
-      $content   = !empty($headline_html) ? "<h1>$headline_html</h1>" : "";
-      $content .= isset($text) ? $content_html . "<div class='text'>" . $text ."</div>" : $content_html;
+      $content = !empty($headline_html) ? "<h1>$headline_html</h1>" : "";
+      $content = isset($text) ? $content . "<div class='text'>" . $text ."</div>" : $content;
 
       //build the gravity form
       if(!empty($gform_id)) {

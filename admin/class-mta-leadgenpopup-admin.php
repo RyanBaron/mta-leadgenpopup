@@ -41,20 +41,20 @@ class Mta_Leadgenpopup_Admin {
   private $version;
 
   /**
-   * The options group name for the plugin settings.
+   * The content options group name for the plugin settings.
    *
    * @since    1.0.2
    * @access   private
-   * @var      string    options_group    The options group name for the plugin settings.
+   * @var      string    $content    The content options group name for the plugin settings.
    */
   private $content;
 
   /**
-   * The options group name for the plugin settings.
+   * The page display options group name for the plugin settings.
    *
    * @since    1.0.2
    * @access   private
-   * @var      string    options_group    The options group name for the plugin settings.
+   * @var      string    $page_display    The page_display options group name for the plugin settings.
    */
   private $page_display;
 
@@ -63,7 +63,7 @@ class Mta_Leadgenpopup_Admin {
    *
    * @since    1.0.2
    * @access   private
-   * @var      string    options_group    The options group name for the plugin settings.
+   * @var      string    $post_display    The post_display options group name for the plugin settings.
    */
   private $post_display;
 
@@ -87,6 +87,14 @@ class Mta_Leadgenpopup_Admin {
     add_action( 'admin_init', array( $this, 'page_init' ) );
   }
 
+  /**
+   * The allowed tags for various field types
+   *
+   * @since   1.0.2
+   * @param   string    $type     The type of allowed field tags
+   *
+   * return   an array of tags allowed for field input
+   */
   public function get_allowed_field_tags($type = '') {
     switch($type) {
       case 'textarea':
@@ -139,7 +147,14 @@ class Mta_Leadgenpopup_Admin {
     return array();
   }
 
-
+  /**
+   * The options select field values
+   *
+   * @since   1.0.2
+   * @param   string    $type     The select field values are needed for
+   *
+   * return   an array of select field options
+   */
   public function get_select_values($type) {
     switch($type) {
       case 'layout':
@@ -195,8 +210,11 @@ class Mta_Leadgenpopup_Admin {
 
 
   /**
-    * Add options page
-    */
+   * Adding an plugin options page
+   *
+   * @since   1.0.2
+   *
+   */
   public function add_plugin_page() {
     //Add a new top level Lead Gen Popup Page
     add_menu_page(
@@ -209,70 +227,75 @@ class Mta_Leadgenpopup_Admin {
   }
 
   /**
-    * Options page callback
-    */
+   * Options page callback
+   *
+   * @since   1.0.2
+   *
+   */
   public function create_admin_page() {
     // Set class property
     $this->content = get_option( 'mta_leadgen_popup_content' );
     $this->page_display = get_option( 'mta_leadgen_popup_page_display' );
-    $this->post_display = get_option( 'mta_leadgen_popup_post_display' );
-?>
+    $this->post_display = get_option( 'mta_leadgen_popup_post_display' ); ?>
 
-<div class="wrap mta-leadgenpopup-options-page">
-  <h1><?php _e("Lead Generation Popup Options", "mta-leadgenpopup"); ?></h1>
-  <?php
-    //we check if the page is visited by click on the tabs or on the menu button.
-    //then we get the active tab.
-    $active_tab = "popup-content";
-    if(isset($_GET["tab"])) {
-      if($_GET["tab"] == "page-display") {
-        $active_tab = "page-display";
-      } elseif ($_GET["tab"] == "post-display") {
-        $active_tab = "post-display";
-      } else {
+    <div class="wrap mta-leadgenpopup-options-page">
+      <h1><?php _e("Lead Generation Popup Options", "mta-leadgenpopup"); ?></h1>
+      <?php
+        //we check if the page is visited by click on the tabs or on the menu button.
+        //then we get the active tab.
         $active_tab = "popup-content";
-      }
-    } ?>
+        if(isset($_GET["tab"])) {
+          if($_GET["tab"] == "page-display") {
+            $active_tab = "page-display";
+          } elseif ($_GET["tab"] == "post-display") {
+            $active_tab = "post-display";
+          } else {
+            $active_tab = "popup-content";
+          }
+        } ?>
 
-  <!-- wordpress provides the styling for tabs. -->
-  <h2 class="nav-tab-wrapper">
-    <!-- when tab buttons are clicked we jump back to the same page but with a new parameter that represents the clicked tab. accordingly we make it active -->
-    <a href="?page=mta-leadgen-popup-admin&tab=popup-content" class="nav-tab <?php if($active_tab == 'popup-content'){echo 'nav-tab-active';} ?> ">
-      <?php _e('Popup Content', 'mta-leadgenpopup'); ?>
-    </a>
-    <a href="?page=mta-leadgen-popup-admin&tab=page-display" class="nav-tab <?php if($active_tab == 'page-display'){echo 'nav-tab-active';} ?>">
-      <?php _e('Page Display', 'mta-leadgenpopup'); ?>
-    </a>
-    <a href="?page=mta-leadgen-popup-admin&tab=post-display" class="nav-tab <?php if($active_tab == 'post-display'){echo 'nav-tab-active';} ?>">
-      <?php _e('Post Display', 'mta-leadgenpopup'); ?>
-    </a>
-  </h2>
+      <!-- wordpress provides the styling for tabs. -->
+      <h2 class="nav-tab-wrapper">
+        <!-- when tab buttons are clicked we jump back to the same page but with a new parameter that represents the clicked tab. accordingly we make it active -->
+        <a href="?page=mta-leadgen-popup-admin&tab=popup-content" class="nav-tab <?php if($active_tab == 'popup-content'){echo 'nav-tab-active';} ?> ">
+          <?php _e('Popup Content', 'mta-leadgenpopup'); ?>
+        </a>
+        <a href="?page=mta-leadgen-popup-admin&tab=page-display" class="nav-tab <?php if($active_tab == 'page-display'){echo 'nav-tab-active';} ?>">
+          <?php _e('Page Display', 'mta-leadgenpopup'); ?>
+        </a>
+        <a href="?page=mta-leadgen-popup-admin&tab=post-display" class="nav-tab <?php if($active_tab == 'post-display'){echo 'nav-tab-active';} ?>">
+          <?php _e('Post Display', 'mta-leadgenpopup'); ?>
+        </a>
+      </h2>
 
-  <form method="post" action="options.php">
-    <?php
-    if($active_tab == 'popup-content') {
-      // This prints out all hidden setting fields
-      settings_fields( 'mta_leadgen_popup_content_group' );
-      do_settings_sections( 'mta-leadgen-popup-settings' );
-      do_settings_sections( 'mta-leadgen-popup-content' );
-      do_settings_sections( 'mta-leadgen-popup-form' );
-    } elseif ($active_tab == 'page-display') {
-      // This prints out all hidden setting fields
-      settings_fields( 'mta_leadgen_popup_page_display_group' );
-      do_settings_sections( 'mta-leadgen-popup-page-display' );
-    } elseif ($active_tab == 'post-display') {
-      // This prints out all hidden setting fields
-      settings_fields( 'mta_leadgen_popup_post_display_group' );
-      do_settings_sections( 'mta-leadgen-popup-post-display' );
-    }
-    submit_button(); ?>
-  </form>
-</div>
-<?php }
+      <form method="post" action="options.php">
+        <?php
+        if($active_tab == 'popup-content') {
+          // This prints out all hidden setting fields
+          settings_fields( 'mta_leadgen_popup_content_group' );
+          do_settings_sections( 'mta-leadgen-popup-settings' );
+          do_settings_sections( 'mta-leadgen-popup-content' );
+          do_settings_sections( 'mta-leadgen-popup-form' );
+        } elseif ($active_tab == 'page-display') {
+          // This prints out all hidden setting fields
+          settings_fields( 'mta_leadgen_popup_page_display_group' );
+          do_settings_sections( 'mta-leadgen-popup-page-display' );
+        } elseif ($active_tab == 'post-display') {
+          // This prints out all hidden setting fields
+          settings_fields( 'mta_leadgen_popup_post_display_group' );
+          do_settings_sections( 'mta-leadgen-popup-post-display' );
+        }
+        submit_button(); ?>
+      </form>
+    </div>
+  <?php }
 
   /**
-    * Register and add settings
-    */
+   * Register and add settings
+   *
+   * @since   1.0.2
+   *
+   */
   public function page_init() {
     //////
     // Register mta leadgen popup content settings
@@ -480,6 +503,8 @@ class Mta_Leadgenpopup_Admin {
   /**
     * Sanitize each display settings field as needed
     *
+    * @since   1.0.2
+    *
     * @param array $input Contains all settings fields as array keys
     */
   public function sanitize_display( $input ) {
@@ -497,6 +522,8 @@ class Mta_Leadgenpopup_Admin {
 
   /**
     * Sanitize each content settings field as needed
+    *
+    * @since   1.0.2
     *
     * @param array $input Contains all settings fields as array keys
     */
@@ -832,7 +859,11 @@ class Mta_Leadgenpopup_Admin {
     // Add an nonce field so we can check for it later.
     wp_nonce_field('mta_leadgenpopup_nonce_check', 'mta_leadgenpopup_nonce_check_value');
 
+    $admin_settings = admin_url( 'admin.php?page=mta-leadgen-popup-admin' );
+
     // Use get_post_meta to retrieve an existing value from the database.
+    $enable         = get_post_meta($post->ID, '_mta_leadgen_enable_custom', true);
+
     $layout         = get_post_meta($post->ID, '_mta_leadgenpopup_layout', true);
     $trigger        = get_post_meta($post->ID, '_mta_leadgenpopup_trigger', true);
     $timer          = get_post_meta($post->ID, '_mta_leadgenpopup_timer', true);
@@ -853,7 +884,14 @@ class Mta_Leadgenpopup_Admin {
     <div class="bootstrap-wrapper mta-leadgenpopup-meta-wrapper <?php echo $layout ?> <?php echo $trigger; ?>">
 
       <div class="display-meta-wrapper">
-
+        <div class="meta-input">
+          <label for="mta_leadgen_enable_custom"><?php printf( __('Enable Single Page Popup', 'mta-leadgenpopup') ); ?></label>
+          <select name="mta_leadgen_enable_custom" id="mta_leadgen_enable_custom">
+            <option value="" <?php selected( $enable, "" ); ?>><?php printf( __('Default', 'mta-leadgenpopup') ); ?></option>
+            <option value="custom" <?php selected( $enable, "custom" ); ?>><?php printf( __('Custom', 'mta-leadgenpopup') ); ?></option>
+          </select>
+          <div class="desc"><?php printf( __('Selecting "Custom" will allow you to overwrite the settings on the main <a href="%1$s" target="_blank">Admin MTA Lead Generation Page</a> for this individual page/post.', 'mta-leadgenpopup'), $admin_settings ); ?></div>
+        </div>
       </div>
 
       <div class="style-meta-wrapper">
@@ -1028,6 +1066,9 @@ class Mta_Leadgenpopup_Admin {
     $allowed_input_textarea = $this->get_allowed_field_tags('textarea');
 
     /* OK, its safe for us to save the data now. */
+    if( isset( $_POST['mta_leadgen_enable_custom'] ) )
+      update_post_meta( $post_id, '_mta_leadgenpopup_enable_custom', wp_kses( $_POST['mta_leadgen_enable_custom']), $allow_text_only);
+
     if( isset( $_POST['mta_leadgenpopup_layout'] ) )
       update_post_meta( $post_id, '_mta_leadgenpopup_layout', wp_kses( $_POST['mta_leadgenpopup_layout']), $allow_text_only);
 

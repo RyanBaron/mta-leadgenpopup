@@ -66,6 +66,21 @@ body {
       transition: transform 5s;
       //transform: scale(0);
     }
+
+    &.single-col {
+      .mta-leadgenpopup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .mta-leadgenpopup-inside {
+          width:100%;
+          max-width: 800px;
+          align-self: center;
+        }
+      }
+    }
     &.two-col-text-left,
     &.two-col-text-right {
       .mta-leadgenpopup {

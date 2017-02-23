@@ -7,7 +7,7 @@ Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin gives admins the ability to add a popup to individual pages/posts that incorporates a Gravity Form & fires on exit intent or after a specified amount of time.
+Add a popup to individual pages/posts that incorporates a Gravity Form & fires on exit intent or after a specified amount of time.
 
 == Description ==
 
